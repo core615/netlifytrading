@@ -1,0 +1,5 @@
+{
+  "scripts": {
+    "build": "mkdir -p build && cp index.html app.js style.css _redirects build/ && cp -r netlify/functions build/netlify/functions || true"
+  }
+}

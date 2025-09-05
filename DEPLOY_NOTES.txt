@@ -1,0 +1,8 @@
+Quick Deploy Notes
+------------------
+1) Netlify → Site settings → Build & deploy → Environment → (optional) Add keys there; or keep netlify.toml for now.
+2) Use these endpoints after deploy:
+   - /api/env-check
+   - /api/marketstack?endpoint=eod&symbols=AAPL
+   - /api/marketstack?endpoint=intraday&symbols=AAPL&interval=1min&limit=50
+3) If deploy doesn't pick up changes: Deploys → Trigger deploy → Clear cache and deploy site.

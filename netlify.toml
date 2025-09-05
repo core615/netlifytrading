@@ -1,0 +1,12 @@
+[build]
+command = "npm run build"
+publish = "build"
+
+[functions]
+directory = "netlify/functions"
+node_bundler = "esbuild"
+
+[secrets_scan]
+enabled = true
+omit_keys = ["REACT_APP_MARKETSTACK_KEY", "MARKETSTACK_KEY", "REACT_APP_API_KEY"]
+omit_paths = [".env.example"]

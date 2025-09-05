@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Intelfin Trading Desk — Enterprise Edition</title>
+  
+  <link rel="stylesheet" href="style.css">
+  
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+</head>
+<body>
+  <div id="loading"><i class="fa-solid fa-spinner fa-spin"></i>&nbsp;Loading…</div>
+
+  <div class="main-container">
+    <main class="main-content">
+      <div id="error"></div>
+      <div class="stock-header">
+        <h1>
+          <span id="stockName">Apple Inc.</span>
+          (<span id="stockSymbol">AAPL</span>)
+          <small id="exchangeAcronym"></small>
+        </h1>
+        <div>
+          <span id="stockPrice" class="stock-price">$—</span>
+          <span id="stockChange" class="stock-change">—</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h3>Price Chart</h3>
+          <div class="tf" id="tfControls">
+            <button class="active" data-tf="1D">1D</button>
+            <button data-tf="1W">1W</button>
+            <button data-tf="1M">1M</button>
+            <button data-tf="3M">3M</button>
+            <button data-tf="6M">6M</button>
+            <button data-tf="1Y">1Y</button>
+          </div>
+        </div>
+        <canvas id="stockChart"></canvas>
+      </div>
+
+      <div class="card">
+        <div class="card-header"><h3>Key Statistics</h3></div>
+        <div class="stock-stats">
+          <div class="stat-item"><div class="stat-item-label">Open</div><div id="statOpen" class="stat-item-value">—</div></div>
+          <div class="stat-item"><div class="stat-item-label">High</div><div id="statHigh" class="stat-item-value">—</div></div>
+          <div class="stat-item"><div class="stat-item-label">Low</div><div id="statLow" class="stat-item-value">—</div></div>
+          <div class="stat-item"><div class="stat-item-label">Volume</div><div id="statVolume" class="stat-item-value">—</div></div>
+          <div class="stat-item"><div class="stat-item-label">52W High</div><div id="stat52wHigh" class="stat-item-value">—</div></div>
+          <div class="stat-item"><div class="stat-item-label">52W Low</div><div id="stat52wLow" class="stat-item-value">—</div></div>
+        </div>
+      </div>
+    </main>
+
+    <aside class="sidebar">
+      <div class="card">
+        <div class="card-header"><h3>Watchlist</h3></div>
+        <div class="search-container">
+          <input type="text" id="stockSearchInput" placeholder="Search ticker or company...">
+          <div id="searchResults"></div>
+        </div>
+        <div id="watchlist" class="watchlist-container"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-header"><h3>My Profile</h3></div>
+        <form id="profileForm" class="profile-form">
+          <div class="form-group"><label for="userName" class="muted">Name</label><input type="text" id="userName" placeholder="Your Name" required></div>
+          <div class="form-group"><label for="userEmail" class="muted">Email</label><input type="email" id="userEmail" placeholder="your.email@example.com" required></div>
+          <button type="submit" class="btn-primary">Save & Send Welcome Email</button>
+          <div id="saveConfirmation"></div>
+          <div id="emailNotification" class="notification success"><i class="fas fa-check-circle"></i> Welcome email sent!</div>
+          <div id="emailError" class="notification error"><i class="fas fa-exclamation-circle"></i> Email failed to send.</div>
+        </form>
+      </div>
+    </aside>
+  </div>
+  
+  <script src="app.js" type="module"></script>
+</body>
+</html>
