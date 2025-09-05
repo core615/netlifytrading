@@ -1,12 +1,10 @@
 [build]
-command = "npm run build"
-publish = "build"
-
+  command = "mkdir -p build/netlify/functions && cp index.html app.js style.css _redirects build/ && cp -r netlify/functions build/netlify/functions"
+  publish = "build"
 [functions]
-directory = "netlify/functions"
-node_bundler = "esbuild"
-
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
 [secrets_scan]
-enabled = true
-omit_keys = ["REACT_APP_MARKETSTACK_KEY", "MARKETSTACK_KEY", "REACT_APP_API_KEY"]
-omit_paths = [".env.example"]
+  enabled = true
+  omit_keys = ["REACT_APP_MARKETSTACK_KEY", "MARKETSTACK_KEY", "REACT_APP_API_KEY"]
+  omit_paths = [".env.example"]
