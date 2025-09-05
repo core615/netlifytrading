@@ -1,5 +1,5 @@
 [build]
-  command = "mkdir -p build/netlify/functions && cp index.html app.js style.css _redirects build/ && cp -r netlify/functions build/netlify/functions"
+  command = "mkdir -p build/netlify/functions && cp index.html app.js style.css _redirects build/ && cp -r netlify build/"
   publish = "build"
 [functions]
   directory = "netlify/functions"
