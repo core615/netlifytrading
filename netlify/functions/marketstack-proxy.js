@@ -1,3 +1,5 @@
+const https = require('https'); // <-- FIX 1: ADD THIS LINE
+
 exports.handler = async (event, context) => {
   try {
     const params = new URLSearchParams(event.queryStringParameters || {});
@@ -5,12 +7,13 @@ exports.handler = async (event, context) => {
     params.delete("endpoint");
 
     // Find API key from any of these env vars
-    const access_key = process.env.REACT_APP_MARKETSTACK_KEY 
-                    || process.env.MARKETSTACK_KEY 
-                    || process.env.REACT_APP_API_KEY;
+    const access_key = process.env.REACT_APP_MARKETSTACK_KEY
+                      || process.env.MARKETSTACK_KEY
+                      || process.env.REACT_APP_API_KEY;
+    
     console.log('API Key source:', process.env.REACT_APP_MARKETSTACK_KEY ? 'REACT_APP_MARKETSTACK_KEY' : 
-                process.env.MARKETSTACK_KEY ? 'MARKETSTACK_KEY' : 
-                process.env.REACT_APP_API_KEY ? 'REACT_APP_API_KEY' : 'None');
+                                  process.env.MARKETSTACK_KEY ? 'MARKETSTACK_KEY' : 
+                                  process.env.REACT_APP_API_KEY ? 'REACT_APP_API_KEY' : 'None');
 
     if (!access_key) {
       return {
@@ -22,8 +25,12 @@ exports.handler = async (event, context) => {
 
     params.set("access_key", access_key);
 
-    const base = `https://api.marketstack.com/v2/${endpoint}`;
+    // --> FIX 2: CHANGE v2 to v1
+    const base = `https://api.marketstack.com/v1/${endpoint}`;
     const fullUrl = `${base}?${params.toString()}`;
+
+    // Log the URL you're about to fetch
+    console.log("Requesting URL:", fullUrl);
 
     const fetchHttps = (url) => new Promise((resolve, reject) => {
       https.get(url, (res) => {
